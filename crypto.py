@@ -47,7 +47,7 @@ print("Generated new ?basic? number =", new_basic_number)
 basic_representation = pow_basic_presentation(new_basic_number)
 two_degree = basic_representation[1]
 inner_basic_number = basic_representation[0]
-print("p - 1 =", new_basic_number - 1, "= 2 ^", two_degree, "*", inner_basic_number)
+print("new_basic_number - 1 =", new_basic_number - 1, "= 2 ^", two_degree, "*", inner_basic_number)
 basic_chance = 0
 attempts = int(math.log(new_basic_number, 2))
 for i in range(attempts):
