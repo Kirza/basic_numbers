@@ -1,5 +1,5 @@
 #Crypto
-import numpy, random
+import numpy, random, math
 
 STARTING_SIMPLE_NUMBER=571828182881
 
@@ -30,13 +30,13 @@ def rabin_miller(inner_basic_number, new_basic_number):
             # print(i, 'In second cycle \n')
             temp = fast_module_pow(temp, 2, new_basic_number)
             if (temp == 1):
-                return ('not basic')
+                return (False)
             if (temp == (new_basic_number - 1)):
                 break
         if (temp == (new_basic_number - 1)):
                 continue
-        return ('not basic')
-    return ('basic')
+        return (False)
+    return (True)
 
 parent_basic_number = int(input('Enter basic number '))
 random.seed()
@@ -48,4 +48,9 @@ basic_representation = pow_basic_presentation(new_basic_number)
 two_degree = basic_representation[1]
 inner_basic_number = basic_representation[0]
 print("p - 1 =", new_basic_number - 1, "= 2 ^", two_degree, "*", inner_basic_number)
-print(rabin_miller(inner_basic_number, new_basic_number))
+basic_chance = 0
+attempts = int(math.log(new_basic_number, 2))
+for i in range(attempts):
+    if (rabin_miller(inner_basic_number, new_basic_number) == True):
+        basic_chance += 1
+print('Probablity that new number =', new_basic_number, " is basic =", (basic_chance/attempts)*100, "%")
