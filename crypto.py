@@ -17,7 +17,7 @@ def pow_basic_presentation(new_basic_number):
     while (inner_basic_number % 2 == 0):
         two_degree += 1
         inner_basic_number /= 2
-    return [int(inner_basic_number), two_degree]
+    return [int(inner_basic_number), int(two_degree)]
 
 def rabin_miller(inner_basic_number, new_basic_number):
     # attempts = int(math.log(new_basic_number, 2))
@@ -42,8 +42,8 @@ def rabin_miller(inner_basic_number, new_basic_number):
         return 1
     return 4*(-attempts)
 
-# parent_basic_number = int(input('Enter basic number '))
-parent_basic_number = 571828182881
+parent_basic_number = int(input('Enter basic number '))
+# parent_basic_number = 571828182881
 random.seed()
 while True:
     random_temp = random.randint(parent_basic_number + 1, 4 * parent_basic_number + 2)
@@ -61,6 +61,6 @@ while True:
     #     if (rabin_miller(inner_basic_number, new_basic_number) == True):
     #         basic_chance += 1
     # print('Probablity that new number =', new_basic_number, " is basic =", (basic_chance/attempts)*100, "%")
-    if ((rabin_miller(inner_basic_number, new_basic_number) < 0.3)):
+    if ((rabin_miller(inner_basic_number, new_basic_number) < 0.01)):
         break
 print(new_basic_number)
