@@ -10,6 +10,11 @@ def fast_module_pow(base, degree, module):
         base = (base ** 2) % module
     return r
 
+def mauer_number(parent_number):
+    mauer_modifier = random.randint((parent_number + 1)/2, (4 * parent_number + 2)/2) * 2
+    new_prime = parent_number * mauer_modifier + 1
+    return new_prime
+
 def pow_basic_presentation(new_prime):
     two_degree = 0
     inner_odd_number = new_prime - 1
@@ -53,8 +58,7 @@ numbers_checked = 0
 prime_tab = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
 prime_tab_counter = 0
 while True:
-    mauer_modifier = random.randint((parent_number + 1)/2, (4 * parent_number + 2)/2) * 2
-    new_prime = parent_number * mauer_modifier + 1
+    new_prime = mauer_number(parent_number)
     numbers_checked += 1
     basic_representation = pow_basic_presentation(new_prime)
     two_degree = basic_representation[1]
