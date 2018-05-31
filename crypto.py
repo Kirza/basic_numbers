@@ -10,6 +10,11 @@ def fast_module_pow(base, degree, module):
 		base = (base ** 2) % module
 	return r
 
+def fast_module_pow_v2(base, degree, module):
+for bit in "{:b}".format(11):
+    print(bit)
+
+
 # def gcd(first_num, second_num):
 #     while first_num != second_num:
 #         if first_num > second_num:
