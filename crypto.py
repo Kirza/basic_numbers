@@ -12,13 +12,22 @@ def fast_module_pow(base, degree, module):
 
 def pow2(base, degree, module):
     result = base
-    print(base, degree, module)
-    for bit in "{:b}".format(degree):
-        if bit == "0":
-            result = pow(result, 2, module)
-        else:
-            result = result ** 2 * base % module
-            # pow(result, 2, module)
+    # i = 0
+    bin_degree = "{:b}".format(degree)
+    bin_degree = bin_degree[1:]
+    for bit in bin_degree:
+        # if i == 0:
+            # print(bit, "| a", i, "=", result, "mod", module, "| iteration ##", i)
+            # i = i + 1
+            # continue
+        # else:
+        result = ((result ** 2) * (base ** int(bit))) % module
+            # if bit == "0":
+            #     result = (result ** 2) % module
+            # else:
+            #     result = ((result ** 2) * base) % module
+            # print(bit, "| a", i, "=", result, "mod", module, "| iteration #", i)
+            # i = i + 1
     return result
 
 
@@ -64,7 +73,7 @@ def rabin_miller_v2(inner_odd_number, new_prime, two_degree):
         # print("Checked (", random_test_number, ",", new_prime, ") != 1. Result = True. a - good number, new_prime - composite")
         return 1
     else:
-        if (pow(random_test_number, inner_odd_number, new_prime) == 1):
+        if (pow2(random_test_number, inner_odd_number, new_prime) == 1):
             return 0
         for i in range(two_degree - 1):
             if (pow2(random_test_number, pow(2, i) * inner_odd_number, new_prime) == -1):
@@ -106,7 +115,6 @@ while True:
     new_prime = new[0]
     maurer_modifier = new[1]
     numbers_checked += 1
-    # print("Checking potential prime number =", new_prime,  "#", numbers_checked)
     basic_representation = pow_basic_presentation(new_prime)
     two_degree = basic_representation[1]
     inner_odd_number = basic_representation[0]
@@ -125,10 +133,22 @@ while True:
         break
     else:
         mauer_final_test_fail_counter += 1
-    # print("Checked:", numbers_checked, "; Prime_tab_fail:", prime_tab_counter, "; Rabin_fail:", rabin_fail_counter, "; Mauer_test_fail:", mauer_final_test_fail_counter)
         
 print("Generated prime number:", new_prime)
 print("To find it I checked", numbers_checked, "numbers, created with maurer algorithm")
 print(prime_tab_counter, " of them failed on hundred prime numbers division test")
 print(rabin_fail_counter, " of them failed on rabin-miller test")
 print(mauer_final_test_fail_counter, " of them failed on mauer_final_test_fail_counter")
+
+# POW2TEST
+# random.seed()
+# flag = True
+# for _ in range(50):
+#     a = random.randint(2, 100000000)
+#     b = random.randint(2, 100000000)
+#     c = random.randint(2, 100000000)
+#     if pow(a, b, c) != pow2(a, b, c):
+#         flag = False
+# print(flag)
+# # print(pow(a, b, c), pow2(a, b, c))
+# print("for a =", a, "b =", b, "c =", c, "|", "pow =", pow(a, b, c), "| pow2 = ", pow2(a, b, c))
